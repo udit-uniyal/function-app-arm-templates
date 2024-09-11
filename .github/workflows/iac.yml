@@ -28,3 +28,9 @@ jobs:
           tenant_id: ${{ secrets.TENANT_ID}}
           quiet: "true"
           soft_fail: "true"
+
+      - name: Upload IaC scan result as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: iac-scan-results
+          path: ./results/results.json
