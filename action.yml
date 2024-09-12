@@ -54,32 +54,17 @@ runs:
   steps:
     - name: Run Checkov IaC Scan
       id: checkov-scan
-      uses: docker://ghcr.io/bridgecrewio/checkov:3.2.21
-      with:
-        args: |
-          ${INPUT_FILE}
-          ${INPUT_DIRECTORY}
-          ${INPUT_COMPACT}
-          ${INPUT_QUIET}
-          ${INPUT_OUTPUT_FORMAT}
-          ${INPUT_OUTPUT_FILE_PATH}
-          ${INPUT_SOFT_FAIL}
-          ${INPUT_FRAMEWORK}
-      env:
-        INPUT_FILE: ${{ inputs.file }}
-        INPUT_DIRECTORY: ${{ inputs.directory }}
-        INPUT_COMPACT: ${{ inputs.compact }}
-        INPUT_QUIET: ${{ inputs.quiet }}
-        INPUT_OUTPUT_FORMAT: ${{ inputs.output_format }}
-        INPUT_OUTPUT_FILE_PATH: ${{ inputs.output_file_path }}
-        INPUT_SOFT_FAIL: ${{ inputs.soft_fail }}
-        INPUT_FRAMEWORK: ${{ inputs.framework }}
-      continue-on-error: true
-
-    - name: Capture Checkov Exit Code
-      id: capture-exit-code
-      run: echo "CHECKOV_EXIT_CODE=$?" >> $GITHUB_ENV
-      shell: bash
+      run: |
+        docker run --rm ghcr.io/bridgecrewio/checkov:3.2.21 \
+          -f ${{ inputs.file }} -d ${{ inputs.directory }} \
+          --compact=${{ inputs.compact }} \
+          --quiet=${{ inputs.quiet }} \
+          --output-format=${{ inputs.output_format }} \
+          --output-file-path=${{ inputs.output_file_path }} \
+          --framework=${{ inputs.framework }}
+        # Capture the exit code immediately
+        echo "CHECKOV_EXIT_CODE=$?" >> $GITHUB_ENV
+      continue-on-error: true # Allows the pipeline to continue even if there are Checkov errors
 
     - name: Format the results
       run: |
