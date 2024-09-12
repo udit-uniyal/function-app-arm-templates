@@ -60,7 +60,7 @@ runs:
         if [ -n "${{ inputs.file }}" ]; then CMD+=" -f ${{ inputs.file }}"; fi
         if [ -n "${{ inputs.directory }}" ]; then CMD+=" -d ${{ inputs.directory }}"; fi
         if [ -n "${{ inputs.compact }}" ]; then CMD+=" --compact=${{ inputs.compact }}"; fi
-        if [ -n "${{ inputs.quiet }}" ]; then CMD+=" --quiet=${{ inputs.quiet }}"; fi
+        if [ -n "${{ inputs.quiet }}" ]; then CMD+=" --quiet"; fi
         if [ -n "${{ inputs.output_format }}" ]; then CMD+=" --output-format=${{ inputs.output_format }}"; fi
         if [ -n "${{ inputs.output_file_path }}" ]; then CMD+=" --output-file-path=${{ inputs.output_file_path }}"; fi
         if [ -n "${{ inputs.framework }}" ]; then CMD+=" --framework=${{ inputs.framework }}"; fi
