@@ -93,4 +93,4 @@ runs:
     - name: Fail pipeline if Checkov found issues and soft_fail is false
       if: env.CHECKOV_EXIT_CODE != '0' && inputs.soft_fail == 'false'
       run: exit 1 # Fail the pipeline if soft_fail is false
-
+      shell: bash
