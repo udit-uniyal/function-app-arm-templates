@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Run IaC scan
-        uses: accuknox/iac-scan-action@v0.0.1
+        uses: ./action.yml
         with:
           directory: ./
           output_file_path: ./results
@@ -27,7 +27,7 @@ jobs:
           endpoint: "cspm.demo.accuknox.com"
           tenant_id: ${{ secrets.TENANT_ID}}
           quiet: "true"
-          soft_fail: "true"
+          soft_fail: "false"
 
       - name: Upload IaC scan result as artifact
         uses: actions/upload-artifact@v3
