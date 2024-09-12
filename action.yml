@@ -72,6 +72,7 @@ runs:
         # Capture the exit code immediately
         echo "CHECKOV_EXIT_CODE=$?" >> $GITHUB_ENV
       continue-on-error: true # Allows the pipeline to continue even if there are Checkov errors
+      shell: bash
 
     - name: Format the results
       run: |
