@@ -55,17 +55,23 @@ runs:
     - name: Run Checkov IaC Scan
       id: checkov-scan
       run: |
-        docker run --rm ghcr.io/bridgecrewio/checkov:3.2.21 \
-          -f ${{ inputs.file }} -d ${{ inputs.directory }} \
-          --compact=${{ inputs.compact }} \
-          --quiet=${{ inputs.quiet }} \
-          --output-format=${{ inputs.output_format }} \
-          --output-file-path=${{ inputs.output_file_path }} \
-          --framework=${{ inputs.framework }}
+        # Build the command dynamically based on inputs
+        CMD="docker run --rm ghcr.io/bridgecrewio/checkov:3.2.21"
+        if [ -n "${{ inputs.file }}" ]; then CMD+=" -f ${{ inputs.file }}"; fi
+        if [ -n "${{ inputs.directory }}" ]; then CMD+=" -d ${{ inputs.directory }}"; fi
+        if [ -n "${{ inputs.compact }}" ]; then CMD+=" --compact=${{ inputs.compact }}"; fi
+        if [ -n "${{ inputs.quiet }}" ]; then CMD+=" --quiet=${{ inputs.quiet }}"; fi
+        if [ -n "${{ inputs.output_format }}" ]; then CMD+=" --output-format=${{ inputs.output_format }}"; fi
+        if [ -n "${{ inputs.output_file_path }}" ]; then CMD+=" --output-file-path=${{ inputs.output_file_path }}"; fi
+        if [ -n "${{ inputs.framework }}" ]; then CMD+=" --framework=${{ inputs.framework }}"; fi
+
+        # Execute the constructed command
+        echo "Running command: $CMD"
+        eval $CMD
+
         # Capture the exit code immediately
         echo "CHECKOV_EXIT_CODE=$?" >> $GITHUB_ENV
       continue-on-error: true # Allows the pipeline to continue even if there are Checkov errors
-      shell: bash
 
     - name: Format the results
       run: |
