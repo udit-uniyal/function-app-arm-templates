@@ -78,6 +78,7 @@ runs:
     - name: Capture Checkov Exit Code
       id: capture-exit-code
       run: echo "CHECKOV_EXIT_CODE=$?" >> $GITHUB_ENV
+      shell: bash
 
     - name: Format the results
       run: |
