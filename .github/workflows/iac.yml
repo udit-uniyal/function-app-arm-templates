@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Run IaC scan
-        uses: ./action.yml
+        uses: ./
         with:
           directory: ./
           output_file_path: ./results
