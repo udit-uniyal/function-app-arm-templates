@@ -87,3 +87,4 @@ runs:
       run: |
         echo "Checkov scan failed. Breaking the pipeline."
         exit 1
+      shell: bash
