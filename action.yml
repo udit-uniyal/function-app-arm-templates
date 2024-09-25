@@ -91,9 +91,11 @@ runs:
         if [ "${{ steps.checkov-scan.outcome }}" == "failure" ]; then
           echo "checkov_failed=true" >> $GITHUB_ENV
         fi
+      shell: bash
 
     - name: Fail pipeline at the end if Checkov scan failed
       if: env.checkov_failed == 'true'
       run: |
         echo "Checkov scan failed. Exiting with failure."
         exit 1
+      shell: bash
