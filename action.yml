@@ -58,8 +58,8 @@ runs:
           ${INPUT_DIRECTORY}
           ${INPUT_COMPACT}
           ${INPUT_QUIET}
-          --output ${INPUT_OUTPUT_FORMAT}
-          --output-file ${INPUT_OUTPUT_FILE_PATH}
+          ${INPUT_OUTPUT_FORMAT}
+          ${INPUT_OUTPUT_FILE_PATH}
           ${INPUT_SOFT_FAIL}
           ${INPUT_FRAMEWORK}
       env:
