@@ -41,7 +41,7 @@ inputs:
     description: "The URL of the CSPM panel to push the scan results to."
     required: true
     default: "cspm.demo.accuknox.com"
-  label:
+  label_id:
     description: "The label created in AccuKnox SaaS for associating scan results."
     required: true
 
