@@ -28,7 +28,7 @@ jobs:
           tenant_id: ${{ secrets.TENANT_ID}}
           quiet: "true"
           soft_fail: "true"
-
+          label_id: "iac"
       - name: Upload IaC scan result as artifact
         uses: actions/upload-artifact@v3
         with:
